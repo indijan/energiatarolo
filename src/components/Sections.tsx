@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Bolt, ShieldCheck, Sparkles, Zap, CircuitBoard, Mail } from "lucide-react";
+import { ArrowRight, Bolt, ShieldCheck, Sparkles, Mail } from "lucide-react";
 
 const fadeUp = {
   initial: { opacity: 0, y: 20 },
@@ -21,24 +21,24 @@ export function HeroSection({ onCTAClick }: { onCTAClick: () => void }) {
       <motion.div {...fadeUp} className="relative">
         <p className="text-sm uppercase tracking-[0.4em] text-cyan-200/70">Pályázati előszűrés</p>
         <h1 className="mt-4 text-4xl font-semibold leading-tight text-white md:text-6xl">
-          Energiatároló támogatás gyors előszűrése
+          Energiatároló támogatási jogosultság gyors előszűrése
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-white/70">
-          Tudd meg 2 perc alatt, hogy jó eséllyel megfelelsz-e a támogatási feltételeknek. A landing
-          segít tisztán látni, mielőtt hivatalos pályázatot indítanál.
+          Tudd meg 2 perc alatt, hogy jó eséllyel megfelelsz-e a támogatási feltételeknek. Rövid
+          kérdőívünk segít tisztán látni, mielőtt hivatalos pályázatot indítanál.
         </p>
         <div className="mt-8 flex flex-wrap items-center gap-4">
           <button
             type="button"
             onClick={onCTAClick}
-            className="flex items-center gap-2 rounded-full bg-emerald-400 px-6 py-3 text-base font-semibold text-slate-950 transition hover:bg-emerald-300"
+            className="flex cursor-pointer items-center gap-2 rounded-full bg-emerald-400 px-6 py-3 text-base font-semibold text-slate-950 transition hover:bg-emerald-300"
           >
             Jogosultság ellenőrzése (2 perc)
             <ArrowRight className="h-4 w-4" />
           </button>
           <div className="flex items-center gap-3 text-sm text-white/60">
             <ShieldCheck className="h-4 w-4 text-cyan-300" />
-            Nem kérünk adatbázisos regisztrációt
+            Gyors előszűrés, hivatalos adatok nélkül
           </div>
         </div>
       </motion.div>
@@ -56,22 +56,22 @@ export function UsesOfFundsSection() {
         </div>
         <h2 className="mt-4 text-3xl font-semibold text-white">A pályázat célja az energiatárolás erősítése</h2>
         <p className="mt-3 max-w-3xl text-white/70">
-          A pályázati kiírás szerint általában az alábbi tételek támogathatók. A pontos részleteket
-          mindig a hivatalos felhívásban érdemes ellenőrizni.
+          A felhívás alapján a támogatás fókusza az energiatároló beszerzése. Egyes kapcsolódó
+          tételek kizárólag a tárolóval együtt számolhatók el.
         </p>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           {[
             {
-              title: "Otthoni energiatároló beszerzése",
-              text: "Tipikusan 8-12 kWh körüli kapacitású akkumulátor rendszerek.",
+              title: "Villamosenergia-tároló beszerzése",
+              text: "Ez az önállóan támogatható tevékenység, a pályázat központi eleme.",
             },
             {
-              title: "Kapcsolódó telepítési munkák",
-              text: "Kivitelezés, szerelés, engedélyeztetés a kiírás szerinti keretek között.",
+              title: "Inverter és vezérlés (BMS)",
+              text: "Kapcsolódó eszközök költsége csak tárolóval együtt számolható el.",
             },
             {
-              title: "Szükséges kiegészítők",
-              text: "Inverter, vezérlés, rendszerintegráció és hálózati eszközök.",
+              title: "Tervezés, engedélyezés, mérőhely",
+              text: "Tervezés, engedélyezés, mérőhely szabványosítás és fázisbővítés (3×20 A-ig).",
             },
           ].map((item) => (
             <div key={item.title} className="rounded-2xl border border-white/10 bg-slate-900/60 p-5">
@@ -80,50 +80,9 @@ export function UsesOfFundsSection() {
             </div>
           ))}
         </div>
-      </motion.div>
-    </section>
-  );
-}
-
-export function HowItWorksSection() {
-  return (
-    <section className="rounded-[36px] border border-white/10 bg-slate-900/70 p-8">
-      <motion.div {...fadeUp}>
-        <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-cyan-200/70">
-          <CircuitBoard className="h-4 w-4" />
-          Hogyan működik?
-        </div>
-        <h2 className="mt-4 text-3xl font-semibold text-white">3 egyszerű lépés a tiszta képhez</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
-          {[
-            {
-              step: "01",
-              title: "Gyors kérdéssor",
-              text: "7-8 rövid kérdés alapján előszűrjük a jogosultságot.",
-              icon: <Zap className="h-5 w-5 text-emerald-300" />,
-            },
-            {
-              step: "02",
-              title: "Inverter kijelző",
-              text: "Azonnali vizuális jelzés: indulhat / nem indulhat.",
-              icon: <Sparkles className="h-5 w-5 text-cyan-300" />,
-            },
-            {
-              step: "03",
-              title: "Kapcsolatfelvétel",
-              text: "Google űrlapon keresztül visszahívást kérhetsz.",
-              icon: <Mail className="h-5 w-5 text-sky-300" />,
-            },
-          ].map((item) => (
-            <div key={item.step} className="rounded-2xl border border-white/10 bg-slate-950/70 p-5">
-              <div className="flex items-center justify-between">
-                <span className="text-sm text-white/40">{item.step}</span>
-                {item.icon}
-              </div>
-              <h3 className="mt-4 text-lg font-semibold text-white">{item.title}</h3>
-              <p className="mt-2 text-sm text-white/60">{item.text}</p>
-            </div>
-          ))}
+        <div className="mt-6 rounded-2xl border border-white/10 bg-slate-900/60 p-5 text-sm text-white/60">
+          Nem támogatható: szigetüzemű rendszer, saját kivitelezés, illetve olyan helyszín, ahol
+          gazdasági tevékenység folyik.
         </div>
       </motion.div>
     </section>
@@ -173,19 +132,21 @@ export function FAQSection() {
 }
 
 export function ContactSection() {
-  const GOOGLE_FORM_EMBED_URL = "https://forms.gle/rgrzgjkYfcQH5W2S6";
+  const GOOGLE_FORM_EMBED_URL =
+    "https://docs.google.com/forms/d/e/1FAIpQLScCmJ9AO2zdGGHRfTEcn0Q5Gm0n_JBlhwZCbni4Udq7fqXeug/viewform?embedded=true";
 
   return (
     <section id="contact" className="rounded-[36px] border border-white/10 bg-slate-900/70 p-8">
       <motion.div {...fadeUp}>
         <div className="flex items-center gap-3 text-sm uppercase tracking-[0.3em] text-cyan-200/70">
           <Mail className="h-4 w-4" />
-          Kapcsolat / Visszahívás
+          Kapcsolatfelvétel
         </div>
-        <h2 className="mt-4 text-3xl font-semibold text-white">Add le az érdeklődésedet egy perc alatt</h2>
+        <h2 className="mt-4 text-3xl font-semibold text-white">
+          Amennyiben sikeres pályázatot szeretnél, add meg az adataidat és felvesszük veled a kapcsolatot
+        </h2>
         <p className="mt-3 max-w-2xl text-white/70">
-          A kapcsolatfelvétel Google Formon keresztül történik. Az adataid a Google rendszereiben
-          kerülnek rögzítésre, adatbázist nem üzemeltetünk.
+          Az űrlap kitöltése után rövid időn belül visszajelzünk.
         </p>
         <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-slate-950/70 p-2">
           <div className="aspect-[4/5] w-full sm:aspect-[16/9]">
@@ -198,8 +159,7 @@ export function ContactSection() {
           </div>
         </div>
         <p className="mt-4 text-xs text-white/50">
-          Adatkezelés: <a className="underline" href="#">Adatkezelési tájékoztató</a> • A Google
-          űrlapok saját adatkezelési szabályzata szerint működnek.
+          Adatkezelés: <a className="cursor-pointer underline" href="#">Adatkezelési tájékoztató</a>
         </p>
       </motion.div>
     </section>
@@ -207,15 +167,5 @@ export function ContactSection() {
 }
 
 export function FooterSection() {
-  return (
-    <footer className="rounded-[30px] border border-white/10 bg-slate-950/70 p-6 text-sm text-white/60">
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <p>Energiatároló pályázati előszűrés — 2024</p>
-        <div className="flex items-center gap-4">
-          <a href="#" className="hover:text-white">Adatkezelés</a>
-          <a href="#" className="hover:text-white">Impresszum</a>
-        </div>
-      </div>
-    </footer>
-  );
+  return null;
 }

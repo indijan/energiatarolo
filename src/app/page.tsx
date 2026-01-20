@@ -6,7 +6,6 @@ import {
   FAQSection,
   FooterSection,
   HeroSection,
-  HowItWorksSection,
   UsesOfFundsSection,
 } from "../components/Sections";
 
@@ -26,7 +25,6 @@ export default function Page() {
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-16 pt-10">
         <HeroSection onCTAClick={handleScrollToWizard} />
         <UsesOfFundsSection />
-        <HowItWorksSection />
         <EligibilityWizard onCompleteScroll={handleScrollToContact} />
         <ContactSection />
         <FAQSection />

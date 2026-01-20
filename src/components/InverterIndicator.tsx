@@ -14,7 +14,7 @@ const statusMap = {
     glow: "glow-green",
   },
   ineligible: {
-    label: "Nem indulhat",
+    label: "Jogosultság kérdéses",
     led: "bg-rose-400",
     glow: "glow-red",
   },
@@ -43,38 +43,20 @@ export function InverterIndicator({ status }: InverterIndicatorProps) {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(14,116,144,0.2),transparent_55%)]" />
 
         <div className="relative flex flex-col gap-5">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-xs uppercase tracking-[0.3em] text-cyan-200/70">Inverter panel</p>
-              <p className="text-xl font-semibold text-white">Jogosultsági állapot</p>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className={`h-4 w-4 rounded-full ${config.led} ${config.glow}`} />
-              <span className="text-sm font-semibold text-white/80">{config.label}</span>
-            </div>
+          <div>
+            <p className="text-xs uppercase tracking-[0.3em] text-cyan-200/70">Jogosultság</p>
+            <p className="text-xl font-semibold text-white">Előszűrés eredménye</p>
           </div>
 
           <div className="grid gap-4 md:grid-cols-[1.2fr_0.8fr]">
             <div className="rounded-2xl border border-white/10 bg-slate-950/70 p-4">
-              <div className="flex items-center justify-between text-xs text-cyan-100/80">
-                <span>Állapot</span>
-                <span>INV-01</span>
-              </div>
-              <div className="mt-4 rounded-xl border border-cyan-500/20 bg-slate-900/80 p-4">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm text-white/60">Eredmény</p>
-                    <p className="text-2xl font-semibold text-white">{config.label}</p>
+              <div className="rounded-xl border border-cyan-500/20 bg-slate-900/80 p-4">
+                <div className="flex items-center justify-between gap-4">
+                  <p className="text-2xl font-semibold text-white">{config.label}</p>
+                  <div className="flex items-center gap-3 rounded-full border border-white/10 bg-slate-950/70 px-4 py-2">
+                    <span className={`h-8 w-8 rounded-full ${config.led} ${config.glow}`} />
                   </div>
-                  <motion.div
-                    animate={{ opacity: [0.3, 0.9, 0.3] }}
-                    transition={{ duration: 2.4, repeat: Infinity }}
-                    className="h-2 w-16 rounded-full bg-cyan-400/60"
-                  />
                 </div>
-                <p className="mt-3 text-sm text-white/60">
-                  A LED állapot jelzi, hogy érdemes-e továbblépni a kapcsolatfelvételhez.
-                </p>
               </div>
             </div>
 
@@ -88,8 +70,8 @@ export function InverterIndicator({ status }: InverterIndicatorProps) {
               </div>
               <div className="mt-6 rounded-xl border border-white/10 bg-slate-900/80 p-3">
                 <div className="flex items-center justify-between text-xs text-white/60">
-                  <span>Kimenet</span>
-                  <span>{status === "pending" ? "--" : status === "eligible" ? "OK" : "NO"}</span>
+                  <span>Állapot</span>
+                  <span>{status === "pending" ? "--" : status === "eligible" ? "Zöld" : "Piros"}</span>
                 </div>
                 <motion.div
                   animate={{ width: ["20%", "80%", "20%"] }}
@@ -100,15 +82,6 @@ export function InverterIndicator({ status }: InverterIndicatorProps) {
             </div>
           </div>
 
-          <div className="flex items-center justify-between rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-xs text-white/60">
-            <span>Szellőzőrács</span>
-            <div className="flex gap-2">
-              {Array.from({ length: 6 }).map((_, index) => (
-                <span key={index} className="h-2 w-6 rounded-full bg-slate-800" />
-              ))}
-            </div>
-            <span>LED panel</span>
-          </div>
         </div>
       </div>
     </motion.div>

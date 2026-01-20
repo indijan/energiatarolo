@@ -8,59 +8,70 @@ import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
 const questions = [
   {
     id: "adult",
-    question: "Nagykorú, cselekvőképes magánszemély vagy magyar adóazonosító jellel?",
+    question: "Nagykorú, cselekvőképes magánszemély vagy, magyar adóazonosító jellel?",
     type: "yesno",
     hard: true,
+    eligibleAnswer: "yes",
   },
   {
     id: "address",
-    question: "A beruházás helyszíne a magyarországi állandó lakcímedhez köthető?",
+    question: "A beruházás helyszíne megegyezik a magyarországi állandó lakcímeddel?",
     type: "yesno",
     hard: true,
+    eligibleAnswer: "yes",
   },
   {
     id: "property",
     question:
-      "Van megfelelő jogcímed az ingatlanhoz (tulajdon, haszonélvezet, lakáscélú lízing)?",
+      "Rendelkezel megfelelő jogcímmel az ingatlanhoz (tulajdon, haszonélvezet, lakáscélú lízing)?",
     type: "yesno",
     hard: true,
+    eligibleAnswer: "yes",
   },
   {
     id: "natural",
     question: "Természetes személyként pályázol (nem vállalkozásként)?",
     type: "yesno",
     hard: true,
+    eligibleAnswer: "yes",
   },
   {
     id: "business-address",
-    question: "Az ingatlan NEM vállalkozás székhelye/telephelye, és nincs vállalkozás tulajdonosként?",
+    question:
+      "Lakóingatlanról van szó, amelyhez nem tartozik vállalkozás (nincs székhely/telephely vagy céges tulajdonos)?",
     type: "yesno",
     hard: true,
+    eligibleAnswer: "yes",
   },
   {
     id: "economic-activity",
-    question: "Az ingatlanban NEM folytatsz gazdasági tevékenységet (pl. szállás, műhely, óraadás)?",
+    question:
+      "Az ingatlanban folyik üzleti/gazdasági tevékenység (pl. szállásadás, műhely, óraadás)?",
     type: "yesno",
-    hard: false,
+    hard: true,
+    eligibleAnswer: "no",
   },
   {
     id: "building-size",
-    question: "Az ingatlan nem 6 lakásnál nagyobb társasházban található?",
+    question: "Az ingatlan családi ház vagy legfeljebb 6 lakásos társasházban található?",
     type: "yesno",
-    hard: false,
+    hard: true,
+    eligibleAnswer: "yes",
   },
   {
     id: "arrears",
-    question: "Nincs 60 napot meghaladó lejárt adó- vagy köztartozásod?",
+    question: "Van jelenleg 60 napot meghaladó lejárt adó- vagy köztartozásod?",
     type: "yesno",
     hard: true,
+    eligibleAnswer: "no",
   },
   {
     id: "prior-support",
     question:
-      "Nincs már érvényes támogatói okiratod ugyanerre a helyszínre (Napenergia Plusz vagy RRF-6.2.1-2021), és nem létesítettél tárolót korábbi programból?",
+      "Van érvényes támogatói okiratod ugyanerre a helyszínre (Napenergia Plusz, RRF-6.2.1-2021), vagy létesítettél korábban tárolót támogatott programból?",
     type: "yesno",
-    hard: false,
+    hard: true,
+    eligibleAnswer: "no",
   },
 ];
 
@@ -83,9 +94,11 @@ export function EligibilityWizard({ onCompleteScroll }: EligibilityWizardProps) 
 
   const status: EligibilityStatus = useMemo(() => {
     if (!showResult) return "pending";
-    const failedHard = questions.some(
-      (question) => question.hard && answers[question.id] === "no"
-    );
+    const failedHard = questions.some((question) => {
+      const answer = answers[question.id];
+      if (!question.hard || answer === undefined) return false;
+      return answer !== question.eligibleAnswer;
+    });
     return failedHard ? "ineligible" : "eligible";
   }, [answers, showResult]);
 
@@ -163,7 +176,7 @@ export function EligibilityWizard({ onCompleteScroll }: EligibilityWizardProps) 
                       key={option.value}
                       type="button"
                       onClick={() => handleAnswer(option.value)}
-                      className={`rounded-2xl border px-4 py-5 text-left text-lg font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 ${
+                      className={`cursor-pointer rounded-2xl border px-4 py-5 text-left text-lg font-medium transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400/80 ${
                         answers[currentQuestion.id] === option.value
                           ? "border-cyan-400 bg-cyan-400/15 text-white"
                           : "border-white/10 bg-slate-950/60 text-white/70 hover:border-white/30"
@@ -194,16 +207,16 @@ export function EligibilityWizard({ onCompleteScroll }: EligibilityWizardProps) 
                   <button
                     type="button"
                     onClick={reset}
-                    className="rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition hover:border-white/40"
+                    className="cursor-pointer rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition hover:border-white/40"
                   >
                     Újrakezdés
                   </button>
                   <button
                     type="button"
                     onClick={onCompleteScroll}
-                    className="rounded-full bg-emerald-400 px-5 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
+                    className="cursor-pointer rounded-full bg-emerald-400 px-5 py-2 text-sm font-semibold text-slate-950 transition hover:bg-emerald-300"
                   >
-                    Kapcsolatfelvétel (Google űrlap)
+                    Kapcsolatfelvétel
                   </button>
                 </div>
               </motion.div>
@@ -214,7 +227,7 @@ export function EligibilityWizard({ onCompleteScroll }: EligibilityWizardProps) 
             <button
               type="button"
               onClick={goBack}
-              className="flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition hover:border-white/40"
+              className="cursor-pointer flex items-center gap-2 rounded-full border border-white/15 px-4 py-2 text-sm text-white/70 transition hover:border-white/40"
             >
               <ArrowLeft className="h-4 w-4" />
               Vissza
@@ -226,8 +239,8 @@ export function EligibilityWizard({ onCompleteScroll }: EligibilityWizardProps) 
                 onClick={goNext}
                 className={`flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold transition ${
                   canProceed
-                    ? "bg-cyan-400 text-slate-950 hover:bg-cyan-300"
-                    : "bg-white/10 text-white/30"
+                    ? "cursor-pointer bg-cyan-400 text-slate-950 hover:bg-cyan-300"
+                    : "cursor-not-allowed bg-white/10 text-white/30"
                 }`}
               >
                 Következő
