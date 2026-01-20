@@ -8,7 +8,7 @@ import { ArrowRight, ArrowLeft, CheckCircle2 } from "lucide-react";
 const questions = [
   {
     id: "adult",
-    question: "Nagykorú magánszemély vagy, magyar adóazonosítóval?",
+    question: "Nagykorú, cselekvőképes magánszemély vagy magyar adóazonosító jellel?",
     type: "yesno",
     hard: true,
   },
@@ -20,37 +20,45 @@ const questions = [
   },
   {
     id: "property",
-    question: "Van megfelelő jogcímed az ingatlanhoz (tulajdon, haszonélvezet, stb.)?",
+    question:
+      "Van megfelelő jogcímed az ingatlanhoz (tulajdon, haszonélvezet, lakáscélú lízing)?",
     type: "yesno",
     hard: true,
   },
   {
-    id: "grid",
-    question: "Az ingatlan hálózatra csatlakoztatott és technikailag alkalmas?",
+    id: "natural",
+    question: "Természetes személyként pályázol (nem vállalkozásként)?",
     type: "yesno",
     hard: true,
   },
   {
-    id: "solar",
-    question: "Van már napelemed vagy vállalod a napelem-telepítést?",
+    id: "business-address",
+    question: "Az ingatlan NEM vállalkozás székhelye/telephelye, és nincs vállalkozás tulajdonosként?",
     type: "yesno",
     hard: true,
   },
   {
-    id: "storage",
-    question: "Tervezel otthoni energiatárolót (kb. 10 kWh kategória)?",
+    id: "economic-activity",
+    question: "Az ingatlanban NEM folytatsz gazdasági tevékenységet (pl. szállás, műhely, óraadás)?",
     type: "yesno",
     hard: false,
   },
   {
-    id: "timeline",
-    question: "12 hónapon belül meg tudod valósítani a beruházást?",
+    id: "building-size",
+    question: "Az ingatlan nem 6 lakásnál nagyobb társasházban található?",
     type: "yesno",
     hard: false,
   },
   {
-    id: "budget",
-    question: "Tudod vállalni az önerőt és a szükséges adminisztrációt?",
+    id: "arrears",
+    question: "Nincs 60 napot meghaladó lejárt adó- vagy köztartozásod?",
+    type: "yesno",
+    hard: true,
+  },
+  {
+    id: "prior-support",
+    question:
+      "Nincs már érvényes támogatói okiratod ugyanerre a helyszínre (Napenergia Plusz vagy RRF-6.2.1-2021), és nem létesítettél tárolót korábbi programból?",
     type: "yesno",
     hard: false,
   },
