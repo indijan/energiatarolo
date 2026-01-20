@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: light;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 antialiased;
+  }
+}
+
+.circuit-bg {
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(56, 189, 248, 0.12) 1px, transparent 1px),
+    linear-gradient(120deg, rgba(14, 116, 144, 0.15), rgba(30, 64, 175, 0.1));
+  background-size: 40px 40px, 100% 100%;
+}
+
+.circuit-lines {
+  background-image:
+    linear-gradient(90deg, rgba(34, 211, 238, 0.18) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(34, 211, 238, 0.12) 1px, transparent 1px);
+  background-size: 120px 120px;
+  mask-image: radial-gradient(circle at center, rgba(0, 0, 0, 0.9) 20%, transparent 70%);
+}
+
+.glow-green {
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.9), 0 0 32px rgba(34, 197, 94, 0.65);
+}
+
+.glow-red {
+  box-shadow: 0 0 12px rgba(248, 113, 113, 0.9), 0 0 32px rgba(248, 113, 113, 0.6);
+}
+
+.inverter-shadow {
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.7);
+}
+
+@keyframes pulseLine {
+  0% {
+    opacity: 0.35;
+    transform: translateX(0);
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.35;
+    transform: translateX(24px);
+  }
+}
+
+.pulse-line {
+  animation: pulseLine 3.6s ease-in-out infinite;
+}
