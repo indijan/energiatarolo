@@ -148,8 +148,8 @@ export function ContactSection() {
         <p className="mt-3 max-w-2xl text-white/70">
           Az űrlap kitöltése után rövid időn belül visszajelzünk.
         </p>
-        <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-slate-950/70 p-2">
-          <div className="aspect-[4/5] w-full sm:aspect-[16/9]">
+        <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-slate-950/70 p-1 sm:p-2">
+          <div className="h-[780px] w-full sm:h-[1100px]">
             <iframe
               title="Kapcsolatfelvétel"
               src={GOOGLE_FORM_EMBED_URL}
