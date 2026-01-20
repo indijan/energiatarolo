@@ -149,7 +149,7 @@ export function ContactSection() {
           Az űrlap kitöltése után rövid időn belül visszajelzünk.
         </p>
         <div className="mt-6 overflow-hidden rounded-3xl border border-white/10 bg-slate-950/70 p-1 sm:p-2">
-          <div className="h-[900px] w-full sm:h-[1100px]">
+          <div className="h-[940px] w-full sm:h-[1100px]">
             <iframe
               title="Kapcsolatfelvétel"
               src={GOOGLE_FORM_EMBED_URL}
